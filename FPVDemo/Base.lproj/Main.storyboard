@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y5h-KL-TjC">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y5h-KL-TjC">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -51,7 +53,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jaP-D2-yJL">
-                                        <rect key="frame" x="148" y="8" width="186" height="41"/>
+                                        <rect key="frame" x="148" y="8" width="87" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="41" id="nby-a8-xYf"/>
                                         </constraints>
@@ -75,16 +77,26 @@
                                             <action selector="captureAction:" destination="Y5h-KL-TjC" eventType="touchUpInside" id="sl3-3F-qVr"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UyS-QD-vrs">
+                                        <rect key="frame" x="333.5" y="8" width="55" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="41" id="URj-HA-pJP"/>
+                                            <constraint firstAttribute="width" constant="55" id="XBw-Sl-wCm"/>
+                                        </constraints>
+                                        <state key="normal" title="Stream">
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="streamAction:" destination="Y5h-KL-TjC" eventType="touchUpInside" id="jBC-zw-UrT"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="hfh-HM-hBW" firstAttribute="leading" secondItem="jaP-D2-yJL" secondAttribute="trailing" constant="35" id="2DG-fJ-SKc">
-                                        <variation key="widthClass=compact" constant="179"/>
-                                        <variation key="heightClass=compact-widthClass=compact" constant="99"/>
-                                    </constraint>
+                                    <constraint firstItem="UyS-QD-vrs" firstAttribute="leading" secondItem="Nm0-qQ-Lf7" secondAttribute="centerX" id="8kW-MS-rzp"/>
                                     <constraint firstAttribute="height" constant="57" id="B1Q-nK-9SU"/>
-                                    <constraint firstItem="hfh-HM-hBW" firstAttribute="leading" secondItem="jaP-D2-yJL" secondAttribute="trailing" constant="168" id="F5p-TN-hXg"/>
                                     <constraint firstItem="jaP-D2-yJL" firstAttribute="top" secondItem="Nm0-qQ-Lf7" secondAttribute="top" constant="8" id="KEg-wm-f6R"/>
+                                    <constraint firstItem="UyS-QD-vrs" firstAttribute="baseline" secondItem="jaP-D2-yJL" secondAttribute="baseline" id="kqr-uN-yhs"/>
                                     <constraint firstItem="hfh-HM-hBW" firstAttribute="top" secondItem="Nm0-qQ-Lf7" secondAttribute="top" constant="15" id="pLX-z7-2xT"/>
                                     <constraint firstItem="jaP-D2-yJL" firstAttribute="leading" secondItem="lgV-S3-wDx" secondAttribute="trailing" priority="500" constant="113" id="qBA-uy-aL2">
                                         <variation key="widthClass=compact" constant="59"/>
@@ -98,22 +110,6 @@
                                         <variation key="widthClass=compact" constant="45"/>
                                     </constraint>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="2DG-fJ-SKc"/>
-                                        <exclude reference="F5p-TN-hXg"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="2DG-fJ-SKc"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="F5p-TN-hXg"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -136,6 +132,7 @@
                         <outlet property="fpvView" destination="e7o-PK-R6D" id="R78-59-cmA"/>
                         <outlet property="recordButton" destination="jaP-D2-yJL" id="9tP-s5-pa9"/>
                         <outlet property="recordTimeLabel" destination="WvS-Bv-OaZ" id="cHr-jx-t8k"/>
+                        <outlet property="streamButton" destination="UyS-QD-vrs" id="HQ2-WC-JiH"/>
                         <outlet property="workModeSegmentControl" destination="hfh-HM-hBW" id="PGc-bE-vMI"/>
                     </connections>
                 </viewController>

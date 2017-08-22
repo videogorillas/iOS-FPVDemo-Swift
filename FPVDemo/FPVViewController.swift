@@ -5,18 +5,25 @@
 
 import UIKit
 import DJISDK
+import RxSwift
 import VideoPreviewer
 
 
 class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerDelegate, DJICameraDelegate {
     
     var isRecording : Bool!
-    
+    var isStreaming : Bool = false
+    let frameData = PublishSubject<[UInt8]>()
+    let scheduler = SerialDispatchQueueScheduler(qos: .default)
+    var bla: Bla?
+
     @IBOutlet var recordTimeLabel: UILabel!
     
     @IBOutlet var captureButton: UIButton!
     
     @IBOutlet var recordButton: UIButton!
+
+    @IBOutlet var streamButton: UIButton!
     
     @IBOutlet var workModeSegmentControl: UISegmentedControl!
     
@@ -176,7 +183,10 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
     
     // DJIVideoFeedListener Method
     func videoFeed(_ videoFeed: DJIVideoFeed, didUpdateVideoData rawData: Data) {
-        
+        if isStreaming {
+            frameData.onNext([UInt8](rawData))
+        }
+
         let videoData = rawData as NSData
         let videoBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: videoData.length)
         videoData.getBytes(videoBuffer, length: videoData.length)
@@ -201,7 +211,7 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
     }
     
     @IBAction func recordAction(_ sender: UIButton) {
-        
+        print("recordAction")
         let camera = self.fetchCamera()
         if (camera != nil) {
             if (self.isRecording) {
@@ -239,6 +249,21 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
                 })
                 
             }
+        }
+    }
+
+    @IBAction func streamAction(_ sender: UIButton) {
+        print("streamAction")
+        if !isStreaming {
+            isStreaming = true
+            sender.setTitle("Stop", for: UIControlState.normal)
+            let avframes:Observable<AVFrame> = inspireFrames(videoData: frameData).subscribeOn(scheduler)
+            self.bla = Bla(avframes: avframes)
+            self.bla?.connect()
+        } else {
+            isStreaming = false
+            sender.setTitle("Stream", for: UIControlState.normal)
+            bla?.stop()
         }
     }
 
