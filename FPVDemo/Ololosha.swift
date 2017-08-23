@@ -185,9 +185,11 @@ class Bla {
                     }
                     self.rtmpStream.muxer.sampleOutput(video: _enc)
                 case .error(let err):
-                    print(err)
+                    print("error: \(err)")
+                    self.stop()
                 case .completed:
-                    print("done")
+                    print("completed")
+                    self.stop()
                 }
             }
         default:
@@ -201,6 +203,8 @@ class Bla {
     }
 
     func stop() {
+        rtmpConnection.addEventListener(HaishinKit.HEvent.RTMP_STATUS, selector: #selector(Bla.rtmpStatusHandler(_:)), observer: self)
+        rtmpConnection.close()
         sub?.dispose()
     }
 }
