@@ -208,29 +208,3 @@ class Bla {
         sub?.dispose()
     }
 }
-
-//var bla: Bla = Bla();
-
-func setupRtmp() {
-    let logger: Logboard = Logboard.with(HaishinKit.identifier)
-    logger.level = .trace
-//    let aMirror = Mirror(reflecting: rtmpStream)
-//    print(aMirror)
-//    let _muxer = aMirror.children.filter { child in
-//        return child.label == "muxer"
-//    }.map { child -> RTMPMuxer in
-//        return child.value as RTMPMuxer
-//    }[0];
-//    print(_muxer)
-//    print(rtmpStream.muxer)
-
-
-//    bla.connect()
-    print("connect sent")
-
-//    let interval: Observable<Int> = Observable.interval(1.0, scheduler: MainScheduler.instance)
-//    interval.subscribe { e in
-//        print("interval \(e)")
-//    }
-//    dispatchMain()
-}
