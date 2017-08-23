@@ -15,7 +15,7 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
     var isStreaming : Bool = false
     let frameData = PublishSubject<[UInt8]>()
     let scheduler = SerialDispatchQueueScheduler(qos: .default)
-    var bla: Bla?
+    var simpleRtmp: SimpleRtmp?
 
     @IBOutlet var recordTimeLabel: UILabel!
     
@@ -257,13 +257,13 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
         if !isStreaming {
             isStreaming = true
             sender.setTitle("Stop", for: UIControlState.normal)
-            let avframes:Observable<AVFrame> = inspireFrames(videoData: frameData).subscribeOn(scheduler)
-            self.bla = Bla(avframes: avframes)
-            self.bla?.connect()
+            let avframes:Observable<AVFrame> = RxDji.inspireFrames(videoData: frameData).subscribeOn(scheduler)
+            self.simpleRtmp = SimpleRtmp()
+            self.simpleRtmp?.publish(avframes: avframes)
         } else {
             isStreaming = false
             sender.setTitle("Stream", for: UIControlState.normal)
-            bla?.stop()
+            simpleRtmp?.stop()
         }
     }
 
