@@ -259,7 +259,10 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
             sender.setTitle("Stop", for: UIControlState.normal)
             let avframes:Observable<AVFrame> = RxDji.inspireFrames(videoData: frameData).subscribeOn(scheduler)
             self.simpleRtmp = SimpleRtmp()
-            self.simpleRtmp?.publish(avframes: avframes)
+            let rtmpUri: String = "rtmpt://10.0.1.124:8042/live4"
+            let streamName: String = "alex@videogorillas.com/stream_\(arc4random())"
+
+            self.simpleRtmp?.publish(rtmpUri: rtmpUri, streamName: streamName, avframes: avframes)
         } else {
             isStreaming = false
             sender.setTitle("Stream", for: UIControlState.normal)

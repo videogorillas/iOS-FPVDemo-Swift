@@ -10,15 +10,13 @@ import AVFoundation
 import HaishinKit
 
 class SimpleRtmp {
-    let rtmpUri: String = "rtmpt://10.0.1.124:8042/live4"
-    let streamName: String = "alex@videogorillas.com/stream_\(arc4random())"
-
     var rtmpConnection: RTMPConnection = RTMPConnection()
     let rtmpStream: RTMPStream;
     let scheduler = SerialDispatchQueueScheduler.init(qos: .default)
     var formatSet = false
     var sub: Disposable?;
     var avframes:Observable<AVFrame>?;
+    var streamName:String?;
 
     init() {
         rtmpStream = RTMPStream(connection: rtmpConnection)
@@ -39,7 +37,7 @@ class SimpleRtmp {
 
         switch code {
         case RTMPConnection.Code.connectSuccess.rawValue:
-            rtmpStream.publish(streamName)
+            rtmpStream.publish(self.streamName)
         case RTMPStream.Code.publishStart.rawValue:
             let decoder = RxDecoder(ppsHex: RxDji.inspirePpsHex, spsHex: RxDji.inspireSpsHex)
             let encoder = RxEncoder()
@@ -71,8 +69,9 @@ class SimpleRtmp {
         }
     }
 
-    func publish(avframes:Observable<AVFrame>) {
+    func publish(rtmpUri:String, streamName:String, avframes:Observable<AVFrame>) {
         self.avframes = avframes
+        self.streamName = streamName
         rtmpConnection.addEventListener(HaishinKit.HEvent.RTMP_STATUS, selector: #selector(SimpleRtmp.rtmpStatusHandler(_:)), observer: self)
         rtmpConnection.connect(rtmpUri, arguments: nil)
     }

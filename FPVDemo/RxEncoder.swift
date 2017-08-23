@@ -108,7 +108,7 @@ class RxEncoder {
             self.setup(observer: observer);
             return uncompressed.subscribe { e in
                 switch e {
-                case .next(var decoded):
+                case .next(let decoded):
                     var flags: VTEncodeInfoFlags = VTEncodeInfoFlags()
                     let imageBuffer: CVImageBuffer = decoded.imageBuffer
                     VTCompressionSessionEncodeFrame(

@@ -94,7 +94,7 @@ class RxDecoder {
 
             return frames.subscribe { e in
                 switch e {
-                case .next(var frame):
+                case .next(let frame):
                     OSAtomicIncrement32(&self.pending)
                     let _expectedCount = frame.frame.count
                     frame.frame.withUnsafeBufferPointer { bytes in
