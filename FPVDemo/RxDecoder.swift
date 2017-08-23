@@ -7,8 +7,11 @@ import Foundation
 import RxSwift
 import VideoToolbox
 import AVFoundation
+import Logboard
 
 class RxDecoder {
+    let log = Logboard.with("ololosha")
+
     var obs: AnyObserver<DecodedFrame>?;
     var completed: Bool = false;
     var pending: Int32 = 0;
@@ -49,7 +52,7 @@ class RxDecoder {
                     duration: CMTime) in
 
                 if decompressionOutputRefCon == nil {
-                    print("done")
+                    print("ERROR decompressionOutputRefCon == nil")
                     return
                 }
 
@@ -57,7 +60,7 @@ class RxDecoder {
                 let _state = Unmanaged<RxDecoder>.fromOpaque(decompressionOutputRefCon!).takeUnretainedValue()
 
                 if status == noErr {
-                    print("decoded \(presentationTimeStamp.value)")
+                    _state.log.debug("decoded \(presentationTimeStamp.value)")
                     let decoded = DecodedFrame(presentationTimeStamp: presentationTimeStamp, duration: duration, imageBuffer: imageBuffer!)
                     _state.obs!.on(.next(decoded));
                     if _state.pending == 0 && _state.completed {
@@ -65,12 +68,12 @@ class RxDecoder {
                     }
                 } else {
                     let _err = myError(err: status)
-                    print("decode error f:\(presentationTimeStamp.value) e: \(_err)")
-                    _state.obs!.on(.error(_err))
+                    _state.log.error("decode error f:\(presentationTimeStamp.value) e: \(_err)")
+//                    _state.obs!.on(.error(_err))
                 }
                 let _pending = OSAtomicDecrement32(&_state.pending)
                 if _pending > 0 {
-                    print("pending: \(_pending)")
+                    _state.log.debug("pending: \(_pending)")
                 }
             };
             record.decompressionOutputRefCon = unsafeBitCast(self, to: UnsafeMutableRawPointer.self)
@@ -126,15 +129,15 @@ class RxDecoder {
                     }
 
                 case .error(let error):
-                    print("error")
+                    self.log.error("error \(error)")
                     observer.on(.error(error))
                 case .completed:
-                    print("completed")
+                    self.log.debug("completed")
                     self.completed = true;
                     if self.pending == 0 {
                         observer.on(.completed)
                     } else {
-                        print("pending frames \(self.pending)")
+                        self.log.debug("pending frames \(self.pending)")
                     }
                 }
             }

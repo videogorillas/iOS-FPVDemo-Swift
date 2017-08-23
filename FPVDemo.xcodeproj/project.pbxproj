@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8EF9ACA540AE028719DDA1A2 /* libPods-FPVDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8292D6F935B6C78100F5A5BD /* libPods-FPVDemo.a */; };
+		6217E0ACA18BBA8DB13D1C4F /* OutputStreamWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6217E38269715FC6A4077D5C /* OutputStreamWrite.swift */; };
+		6217EB19E80CC4A03790FDE0 /* FileAppender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6217EF232CD8CF68BE88BEA0 /* FileAppender.swift */; };
+		839D2A0B03165D26F361C5F7 /* Pods_FPVDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E851F701F295A619A5539B97 /* Pods_FPVDemo.framework */; };
 		986E4DD81EC4EEFC0094EAD3 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B5E95C1EC4D72D00A66949 /* VideoPreviewer.framework */; };
 		986E4DD91EC4EEFC0094EAD3 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 98B5E95C1EC4D72D00A66949 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A454E55B1EC5A2A2006B9E09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A454E5571EC5A2A2006B9E09 /* AppDelegate.swift */; };
@@ -16,6 +18,13 @@
 		A454E55E1EC5A2A2006B9E09 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A454E55A1EC5A2A2006B9E09 /* Info.plist */; };
 		A454E5631EC5A2B6006B9E09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A454E55F1EC5A2B6006B9E09 /* LaunchScreen.storyboard */; };
 		A454E5641EC5A2B6006B9E09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A454E5611EC5A2B6006B9E09 /* Main.storyboard */; };
+		BAF27CFF1F4DE5C500B2C023 /* RxDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF27CF81F4DE5C500B2C023 /* RxDecoder.swift */; };
+		BAF27D001F4DE5C500B2C023 /* RxDji.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF27CF91F4DE5C500B2C023 /* RxDji.swift */; };
+		BAF27D011F4DE5C500B2C023 /* RxEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF27CFA1F4DE5C500B2C023 /* RxEncoder.swift */; };
+		BAF27D021F4DE5C500B2C023 /* RxMuxer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF27CFB1F4DE5C500B2C023 /* RxMuxer.swift */; };
+		BAF27D031F4DE5C500B2C023 /* RxSwiftExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF27CFC1F4DE5C500B2C023 /* RxSwiftExtras.swift */; };
+		BAF27D041F4DE5C500B2C023 /* SimpleRtmp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF27CFD1F4DE5C500B2C023 /* SimpleRtmp.swift */; };
+		BAF27D051F4DE5C500B2C023 /* VideoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF27CFE1F4DE5C500B2C023 /* VideoUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +59,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8292D6F935B6C78100F5A5BD /* libPods-FPVDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FPVDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6217E38269715FC6A4077D5C /* OutputStreamWrite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputStreamWrite.swift; sourceTree = SOURCE_ROOT; };
+		6217EF232CD8CF68BE88BEA0 /* FileAppender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileAppender.swift; sourceTree = SOURCE_ROOT; };
 		86985CC91E834EC200577EC7 /* FPVDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FPVDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6CEF0828C4E1C613FFD95E /* Pods-FPVDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FPVDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FPVDemo/Pods-FPVDemo.release.xcconfig"; sourceTree = "<group>"; };
 		A435F2111E8BD6BF00D58045 /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
@@ -61,6 +71,14 @@
 		A454E5601EC5A2B6006B9E09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = FPVDemo/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		A454E5621EC5A2B6006B9E09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = FPVDemo/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		B5E4379880A961CF296B013B /* Pods-FPVDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FPVDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FPVDemo/Pods-FPVDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		BAF27CF81F4DE5C500B2C023 /* RxDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxDecoder.swift; path = FPVDemo/RxDecoder.swift; sourceTree = SOURCE_ROOT; };
+		BAF27CF91F4DE5C500B2C023 /* RxDji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxDji.swift; path = FPVDemo/RxDji.swift; sourceTree = SOURCE_ROOT; };
+		BAF27CFA1F4DE5C500B2C023 /* RxEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxEncoder.swift; path = FPVDemo/RxEncoder.swift; sourceTree = SOURCE_ROOT; };
+		BAF27CFB1F4DE5C500B2C023 /* RxMuxer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxMuxer.swift; path = FPVDemo/RxMuxer.swift; sourceTree = SOURCE_ROOT; };
+		BAF27CFC1F4DE5C500B2C023 /* RxSwiftExtras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxSwiftExtras.swift; path = FPVDemo/RxSwiftExtras.swift; sourceTree = SOURCE_ROOT; };
+		BAF27CFD1F4DE5C500B2C023 /* SimpleRtmp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleRtmp.swift; path = FPVDemo/SimpleRtmp.swift; sourceTree = SOURCE_ROOT; };
+		BAF27CFE1F4DE5C500B2C023 /* VideoUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoUtils.swift; path = FPVDemo/VideoUtils.swift; sourceTree = SOURCE_ROOT; };
+		E851F701F295A619A5539B97 /* Pods_FPVDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FPVDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +87,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				986E4DD81EC4EEFC0094EAD3 /* VideoPreviewer.framework in Frameworks */,
-				8EF9ACA540AE028719DDA1A2 /* libPods-FPVDemo.a in Frameworks */,
+				839D2A0B03165D26F361C5F7 /* Pods_FPVDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				A435F2111E8BD6BF00D58045 /* VideoPreviewer.xcodeproj */,
-				8292D6F935B6C78100F5A5BD /* libPods-FPVDemo.a */,
+				E851F701F295A619A5539B97 /* Pods_FPVDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -106,12 +124,21 @@
 		86985CCB1E834EC200577EC7 /* FPVDemo */ = {
 			isa = PBXGroup;
 			children = (
+				BAF27CF81F4DE5C500B2C023 /* RxDecoder.swift */,
+				BAF27CF91F4DE5C500B2C023 /* RxDji.swift */,
+				BAF27CFA1F4DE5C500B2C023 /* RxEncoder.swift */,
+				BAF27CFB1F4DE5C500B2C023 /* RxMuxer.swift */,
+				BAF27CFC1F4DE5C500B2C023 /* RxSwiftExtras.swift */,
+				BAF27CFD1F4DE5C500B2C023 /* SimpleRtmp.swift */,
+				BAF27CFE1F4DE5C500B2C023 /* VideoUtils.swift */,
 				A454E5571EC5A2A2006B9E09 /* AppDelegate.swift */,
 				A454E5591EC5A2A2006B9E09 /* FPVViewController.swift */,
 				A454E55A1EC5A2A2006B9E09 /* Info.plist */,
 				A454E55F1EC5A2B6006B9E09 /* LaunchScreen.storyboard */,
 				A454E5611EC5A2B6006B9E09 /* Main.storyboard */,
 				A454E5581EC5A2A2006B9E09 /* Assets.xcassets */,
+				6217EF232CD8CF68BE88BEA0 /* FileAppender.swift */,
+				6217E38269715FC6A4077D5C /* OutputStreamWrite.swift */,
 			);
 			name = FPVDemo;
 			path = "SDK Swift Sample";
@@ -171,7 +198,7 @@
 				TargetAttributes = {
 					86985CC81E834EC200577EC7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 7UL3LRJL93;
+						DevelopmentTeam = TT54A8WV5V;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -246,9 +273,18 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-FPVDemo/Pods-FPVDemo-frameworks.sh",
+				"${PODS_ROOT}/DJI-SDK-iOS/iOS_Mobile_SDK/DJISDK.framework",
+				"${BUILT_PRODUCTS_DIR}/HaishinKit/HaishinKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Logboard/Logboard.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DJISDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HaishinKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Logboard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -261,13 +297,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FPVDemo-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -277,8 +316,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAF27D041F4DE5C500B2C023 /* SimpleRtmp.swift in Sources */,
 				A454E55B1EC5A2A2006B9E09 /* AppDelegate.swift in Sources */,
+				BAF27D011F4DE5C500B2C023 /* RxEncoder.swift in Sources */,
+				BAF27D031F4DE5C500B2C023 /* RxSwiftExtras.swift in Sources */,
+				BAF27D051F4DE5C500B2C023 /* VideoUtils.swift in Sources */,
 				A454E55D1EC5A2A2006B9E09 /* FPVViewController.swift in Sources */,
+				BAF27CFF1F4DE5C500B2C023 /* RxDecoder.swift in Sources */,
+				BAF27D001F4DE5C500B2C023 /* RxDji.swift in Sources */,
+				BAF27D021F4DE5C500B2C023 /* RxMuxer.swift in Sources */,
+				6217EB19E80CC4A03790FDE0 /* FileAppender.swift in Sources */,
+				6217E0ACA18BBA8DB13D1C4F /* OutputStreamWrite.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,7 +465,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				DEVELOPMENT_TEAM = 7UL3LRJL93;
+				DEVELOPMENT_TEAM = TT54A8WV5V;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -428,7 +476,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dji.FPVDemoSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vg.MK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -441,7 +489,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				DEVELOPMENT_TEAM = 7UL3LRJL93;
+				DEVELOPMENT_TEAM = TT54A8WV5V;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -452,7 +500,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dji.FPVDemoSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vg.MK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

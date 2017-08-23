@@ -7,6 +7,7 @@ import Foundation
 import RxSwift
 import VideoToolbox
 import AVFoundation
+import Logboard
 
 class AVFrame {
     var timing: CMSampleTimingInfo;
@@ -70,11 +71,13 @@ func myError(err: OSStatus) -> NSError {
     return NSError(domain: NSOSStatusErrorDomain, code: Int(err))
 }
 
+fileprivate let log = Logboard.with("ololosha")
+
 func currentTimeUsec() -> Int64 {
     var t:timeval = timeval();
 
     guard 0 == gettimeofday(&t, nil) else {
-        print("error gettimeofday")
+        log.error("error gettimeofday")
         return 0
     }
     return Int64(t.tv_sec) * 1000000 + Int64(t.tv_usec)

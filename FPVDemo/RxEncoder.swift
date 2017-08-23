@@ -7,10 +7,12 @@ import Foundation
 import RxSwift
 import VideoToolbox
 import AVFoundation
+import Logboard
 
 class RxEncoder {
     var session: VTCompressionSession?;
     var obs: AnyObserver<CMSampleBuffer>?;
+    let log = Logboard.with("ololosha")
 
     private func setup(observer: AnyObserver<CMSampleBuffer>) {
         self.obs = observer;
@@ -78,8 +80,8 @@ class RxEncoder {
             let _state = Unmanaged<RxEncoder>.fromOpaque(outputCallbackRefCon!).takeUnretainedValue()
 
             guard let sampleBuffer: CMSampleBuffer = sampleBuffer, status == noErr else {
-                print("error encode \(status)")
-                _state.obs!.on(.error(myError(err: status)))
+                _state.log.error("error encode \(status)")
+                //_state.obs!.on(.error(myError(err: status)))
                 return
             }
             _state.obs!.on(.next(sampleBuffer))
@@ -89,13 +91,13 @@ class RxEncoder {
         let err = VTCompressionSessionCreate(kCFAllocatorDefault, width, height, kCMVideoCodecType_H264, nil, attributes as CFDictionary?, nil, callback, unsafeBitCast(self, to: UnsafeMutableRawPointer.self), &_session)
 
         if err != noErr {
-            print("VTCompressionSessionCreate error \(err)")
+            log.error("VTCompressionSessionCreate error \(err)")
             observer.on(.error(myError(err: err)))
             return
         }
         let status = VTSessionSetProperties(_session!, properties as CFDictionary)
         if status != noErr {
-            print("VTSessionSetProperties error \(err)")
+            log.error("VTSessionSetProperties error \(err)")
             observer.on(.error(myError(err: status)))
             return
         }
@@ -121,10 +123,10 @@ class RxEncoder {
                             &flags
                     )
                 case .error(let error):
-                    print("error")
+                    self.log.error("error \(error)")
                     observer.on(.error(error))
                 case .completed:
-                    print("completed")
+                    self.log.debug("completed")
                 }
             }
         }

@@ -7,7 +7,7 @@ import UIKit
 import DJISDK
 import RxSwift
 import VideoPreviewer
-
+import Logboard
 
 class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerDelegate, DJICameraDelegate {
     
@@ -28,7 +28,9 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
     @IBOutlet var workModeSegmentControl: UISegmentedControl!
     
     @IBOutlet var fpvView: UIView!
-    
+
+    let log = Logboard.with("ololosha")
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     
@@ -41,7 +43,7 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        log.level = .trace
         DJISDKManager.registerApp(with: self)
         recordTimeLabel.isHidden = true
     }
@@ -253,13 +255,13 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
     }
 
     @IBAction func streamAction(_ sender: UIButton) {
-        print("streamAction")
+        log.debug("streamAction")
         if !isStreaming {
             isStreaming = true
             sender.setTitle("Stop", for: UIControlState.normal)
             let avframes:Observable<AVFrame> = RxDji.inspireFrames(videoData: frameData).subscribeOn(scheduler)
             self.simpleRtmp = SimpleRtmp()
-            let rtmpUri: String = "rtmpt://10.0.1.124:8042/live4"
+            let rtmpUri: String = "rtmpt://qa.live4.io:80/live4"
             let streamName: String = "alex@videogorillas.com/stream_\(arc4random())"
 
             self.simpleRtmp?.publish(rtmpUri: rtmpUri, streamName: streamName, avframes: avframes)

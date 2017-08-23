@@ -8,6 +8,7 @@ import RxSwift
 import VideoToolbox
 import AVFoundation
 import HaishinKit
+import Logboard
 
 class SimpleRtmp {
     var rtmpConnection: RTMPConnection = RTMPConnection()
@@ -17,23 +18,23 @@ class SimpleRtmp {
     var sub: Disposable?;
     var avframes:Observable<AVFrame>?;
     var streamName:String?;
+    let log = Logboard.with("ololosha")
 
     init() {
         rtmpStream = RTMPStream(connection: rtmpConnection)
     }
 
     @objc func rtmpStatusHandler(_ notification: Notification) throws {
-        print("rtmpStatusHandler \(notification)")
-
+        log.debug("rtmpStatusHandler \(notification)")
         let e: HaishinKit.HEvent = HaishinKit.HEvent.from(notification)
 
         guard
                 let data: ASObject = e.data as? ASObject,
                 let code: String = data["code"] as? String else {
-            print("no code in event")
+            log.debug("no code in event")
             return
         }
-        print("rtmpStatusHandler code \(code)")
+        log.debug("rtmpStatusHandler code \(code)")
 
         switch code {
         case RTMPConnection.Code.connectSuccess.rawValue:
@@ -48,7 +49,7 @@ class SimpleRtmp {
                 case .next(let encoded):
                     let _enc: CMSampleBuffer = encoded
                     let pts: CMTime = CMSampleBufferGetPresentationTimeStamp(_enc)
-                    print("encoded \(pts.value)")
+                    self.log.debug("encoded \(pts.value)")
 
                     if !self.formatSet {
                         self.formatSet = true;
@@ -57,10 +58,10 @@ class SimpleRtmp {
                     }
                     self.rtmpStream.muxer.sampleOutput(video: _enc)
                 case .error(let err):
-                    print("error: \(err)")
+                    self.log.error("error: \(err)")
                     self.stop()
                 case .completed:
-                    print("completed")
+                    self.log.debug("completed")
                     self.stop()
                 }
             }
