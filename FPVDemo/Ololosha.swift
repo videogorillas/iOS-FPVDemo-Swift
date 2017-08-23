@@ -112,7 +112,7 @@ func populatePts(frames: Observable<[UInt8]>) -> Observable<AVFrame> {
             startPts = now
         }
         let d = now - prevPts
-        let pts = now - startPts
+        let pts = prevPts - startPts
         var timing: CMSampleTimingInfo = CMSampleTimingInfo(
                 duration: CMTimeMake(d / 1000, 1000),
                 presentationTimeStamp: CMTimeMake(pts / 1000, 1000),
