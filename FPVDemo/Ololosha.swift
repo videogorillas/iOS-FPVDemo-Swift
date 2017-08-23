@@ -96,18 +96,42 @@ func inspireFrames(videoData:Observable<[UInt8]>) -> Observable<AVFrame> {
         return fullFrame
     }
 
-    var tv: Int64 = 0;
-    let avframes = frames.map { f -> AVFrame in
-        var timing: CMSampleTimingInfo = CMSampleTimingInfo(
-                duration: CMTimeMake(Int64(1), 30),
-                presentationTimeStamp: CMTimeMake(tv, 30),
-                decodeTimeStamp: kCMTimeInvalid
-        )
-        tv += 1
-        return AVFrame(timing: timing, frame: f)
-    }
+    let avframes = populatePts(frames: frames)
 
     return avframes
+}
+
+func populatePts(frames: Observable<[UInt8]>) -> Observable<AVFrame> {
+    var startPts: Int64 = 0;
+    var prevPts: Int64 = 0;
+
+    let avframes = frames.map { f -> AVFrame in
+        let now = currentTimeUsec()
+        if prevPts == 0 {
+            prevPts = now
+            startPts = now
+        }
+        let d = now - prevPts
+        let pts = now - startPts
+        var timing: CMSampleTimingInfo = CMSampleTimingInfo(
+                duration: CMTimeMake(d / 1000, 1000),
+                presentationTimeStamp: CMTimeMake(pts / 1000, 1000),
+                decodeTimeStamp: kCMTimeInvalid
+        )
+        prevPts = now
+        return AVFrame(timing: timing, frame: f)
+    }
+    return avframes
+}
+
+func currentTimeUsec() -> Int64 {
+    var t:timeval = timeval();
+
+    guard 0 == gettimeofday(&t, nil) else {
+        print("error gettimeofday")
+        return 0
+    }
+    return Int64(t.tv_sec * 1000000 + t.tv_usec)
 }
 
 class Bla {
